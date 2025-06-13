@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>แนะนำห้องพิเศษโรงพยาบาลไชยา</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: 'Sarabun', sans-serif;
+      background-color: #f0f4f8;
+    }
+    header {
+      background-color: #007bff;
+      color: white;
+      padding: 1.5em;
+      text-align: center;
+    }
+    .container {
+      padding: 2em;
+      max-width: 1200px;
+      margin: auto;
+    }
+    .room-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    .room {
+      background-color: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+    .room:hover {
+      transform: translateY(-5px);
+    }
+    .gallery {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+    }
+    .gallery img {
+      width: 100%;
+      max-width: 800px;
+      height: 400px;
+      object-fit: cover;
+      flex-shrink: 0;
+      margin-right: 10px;
+      scroll-snap-align: start;
+      border-radius: 10px 10px 0 0;
+    }
+    .room-content {
+      padding: 1em;
+    }
+    .room h3 {
+      margin-top: 0;
+      color: #007bff;
+    }
+    .room p {
+      margin: 0.5em 0;
+    }
+    .button {
+      display: inline-block;
+      margin-top: 0.5em;
+      padding: 0.5em 1em;
+      background-color: #28a745;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+    .button:hover {
+      background-color: #218838;
+    }
+    .form {
+      background: white;
+      padding: 2em;
+      margin-top: 2em;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .form input, .form select, .form textarea {
+      width: 100%;
+      padding: 0.5em;
+      margin-bottom: 1em;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    .form button {
+      background-color: #007bff;
+      color: white;
+      padding: 0.7em 1.5em;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    #roomModal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+    }
+    #modalContent {
+      background: white;
+      border-radius: 10px;
+      max-width: 600px;
+      width: 90%;
+      padding: 20px;
+      position: relative;
+    }
+    #modalContent img {
+      width: 100%;
+      height: auto;
+      margin-bottom: 1em;
+      border-radius: 10px;
+    }
+    #closeModal {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 24px;
+      cursor: pointer;
+    }
+    @media (max-width: 600px) {
+      .gallery img {
+        height: 150px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>แนะนำห้องพิเศษโรงพยาบาลไชยา</h1>
+</header>
+
+<div class="container">
+  <div class="room-list">
+    <div class="room">
+      <div class="gallery">
+        <img src="images/bed-v6v.jpg" alt="เตียงไฟฟ้า">
+      </div>
+      <div class="room-content">
+        <h3>ห้องพิเศษ</h3>
+        <p>ห้องขนาด 32 ตร.ม. พร้อมสิ่งอำนวยความสะดวกครบครัน เช่น โซฟา ทีวี ตู้เย็น และอาหารพิเศษ</p>
+        <p><strong>ราคา: 300,000 บาท/ห้อง</strong></p>
+        <button class="button" onclick="showModal('ห้องพิเศษ', 'images/bed-v6v.jpg', 'ห้องขนาด 32 ตร.ม. พร้อมโซฟา ทีวี ตู้เย็น อาหารพิเศษ\nราคา: 300,000 บาท/ห้อง')">รายละเอียดเพิ่มเติม</button>
+      </div>
+    </div>
+
+    <div class="room">
+      <div class="gallery">
+        <img src="images/103323.jpg" alt="Private Room 1">
+      </div>
+      <div class="room-content">
+        <h3>ถังออกซิเจน</h3>
+        <p>ห้องขนาด 25 ตร.ม. พร้อมห้องน้ำในตัว ทีวี Wi-Fi และเตียงปรับไฟฟ้า</p>
+        <p><strong>ราคา: 10,000 บาท/คืน</strong></p>
+        <button class="button" onclick="showModal('ถังออกซิเจน', 'images/103323.jpg', 'ห้องขนาด 25 ตร.ม.\nพร้อมห้องน้ำในตัว ทีวี Wi-Fi เตียงปรับไฟฟ้า\nราคา: 10,000 บาท/คืน')">รายละเอียดเพิ่มเติม</button>
+      </div>
+    </div>
+
+    <div class="room">
+      <div class="gallery">
+        <img src="images/MK3604.jpg" alt="ICU Room 1">
+      </div>
+      <div class="room-content">
+        <h3>เตียงสามัญ</h3>
+        <p>ห้องควบคุมความดันพร้อมอุปกรณ์ดูแลผู้ป่วยวิกฤตและระบบความปลอดภัยสูงสุด</p>
+        <p><strong>ราคา: 16,000 บาท/คืน</strong></p>
+        <button class="button" onclick="showModal('เตียงสามัญ', 'images/MK3604.jpg', 'ห้องควบคุมความดันพร้อมอุปกรณ์ดูแลผู้ป่วยวิกฤต\nระบบความปลอดภัยสูงสุด\nราคา: 16,000 บาท/คืน')">รายละเอียดเพิ่มเติม</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="form">
+    <h2>จองบริจาค</h2>
+    <form action="#" method="POST">
+      <label>ชื่อ-นามสกุล</label>
+      <input type="text" name="fullname" required>
+      <label>เบอร์โทรติดต่อ</label>
+      <input type="tel" name="phone" required>
+      <label>ประเภทห้อง</label>
+      <select name="room">
+        <option value="VIP">VIP</option>
+        <option value="เดี่ยว">ห้องเดี่ยว</option>
+        <option value="ICU">ICU</option>
+      </select>
+      <label>วันที่เข้าพัก</label>
+      <input type="date" name="checkin" required>
+      <label>หมายเหตุเพิ่มเติม</label>
+      <textarea name="note"></textarea>
+      <button type="submit">ส่งคำขอจอง</button>
+    </form>
+  </div>
+</div>
+
+<div id="roomModal">
+  <div id="modalContent">
+    <span id="closeModal" onclick="document.getElementById('roomModal').style.display='none'">&times;</span>
+    <h2 id="modalTitle"></h2>
+    <img id="modalImg" src="" alt="Room Image">
+    <p id="modalDesc"></p>
+  </div>
+</div>
+
+<script>
+function showModal(title, imgSrc, desc) {
+  document.getElementById('modalTitle').innerText = title;
+  document.getElementById('modalImg').src = imgSrc;
+  document.getElementById('modalDesc').innerText = desc.replace(/\\n/g, '\n');
+  document.getElementById('roomModal').style.display = 'flex';
+}
+</script>
+
+</body>
+</html>
